@@ -26,10 +26,12 @@ for i in range(1, n):
         decreasing[i]+=1
 
 for i in range(0, n-1):
+    #add the last consecutive decreasing index because that will maximize the width
     if decreasing[i] != decreasing[i+1] and decreasing[i]==1:
         heapq.heappush(index_end, i)
         
 for i in range(1, n): 
+    #add the first consecutive increasing index because that will maximize the width
     if increasing[i] != increasing[i-1] and increasing[i]==1: 
         heapq.heappush(index_start, i)
 
@@ -42,6 +44,5 @@ else:
     for i in range(len(index_end)): 
         max_width = max(max_width, (heapq.heappop(index_end)-heapq.heappop(index_start)+1))
     
-    #print(index_end, index_start)
     max_width = max(max_width, n - heapq.heappop(index_start))
     print(max_width)
